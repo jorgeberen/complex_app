@@ -4,14 +4,13 @@
   <%- include('includes/flash') %> <%- include('includes/profileShared') %>
 
   <div class="list-group">
-    <% posts.forEach(function(post){ %>
+    <% following.forEach(function(followedUser){ %>
     <a
-      href="/post/<%= post._id %>"
+      href="/profile/<%= followedUser.username %>"
       class="list-group-item list-group-item-action"
     >
-      <img class="avatar-tiny" src="<%= post.author.avatar %>" />
-      <strong><%= post.title %>1</strong> on <%= post.createdDate.getMonth() + 1
-      %>/<%= post.createdDate.getDate() %>/<%= post.createdDate.getFullYear() %>
+      <img class="avatar-tiny" src="<%= followedUser.avatar %>" />
+      <%= followedUser.username %>
     </a>
     <% }) %>
   </div>

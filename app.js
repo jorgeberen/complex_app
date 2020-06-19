@@ -62,6 +62,7 @@ app.use(function (req, res, next) {
 })
 
 const router = require('./router')
+const { Socket } = require('dgram')
 
 app.use(express.urlencoded({ extended: false })) //Boiler plate code that tells express to add the user-submitted data to our req object (submit form)
 
@@ -74,4 +75,14 @@ app.set('view engine', 'ejs')
 
 app.use('/', router)
 
-module.exports = app
+const server = require('http').createServer(app)
+
+const io = require('socket.io')(server)
+
+io.on('connection', function (socket) {
+  socket.on('chatMessageFromBrowser', function (data) {
+    io.emit('chatMessageFromServer', { message: data.message })
+  })
+})
+
+module.exports = server
