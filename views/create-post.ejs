@@ -1,6 +1,9 @@
 <%- include('includes/header') %>
 
 <div class="container py-md-5 container--narrow">
+
+  <%- include('includes/flash') %>
+
   <form action="/create-post" method="POST">
     <div class="form-group">
       <label for="post-title" class="text-muted mb-1"
@@ -29,7 +32,7 @@
         type="text"
       ></textarea>
     </div>
-
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
     <button class="btn btn-primary">Save New Post</button>
   </form>
 </div>
