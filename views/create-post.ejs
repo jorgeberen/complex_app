@@ -1,7 +1,6 @@
 <%- include('includes/header') %>
 
 <div class="container py-md-5 container--narrow">
-
   <%- include('includes/flash') %>
 
   <form action="/create-post" method="POST">
@@ -21,6 +20,25 @@
     </div>
 
     <div class="form-group">
+      <label for="post-title" class="text-muted mb-1"
+        ><small>Location</small></label
+      >
+      <input
+        required
+        name="location"
+        id="post-location"
+        class="form-control form-control-lg"
+        type="text"
+        placeholder="Type your location if you'd like!"
+        autocomplete="off"
+      />
+      <!-- <input type="checkbox" name="weather" value="sunny" />
+       -->
+      <!-- <input type="text" name="weather" id="weather" />
+      <label for="weather">Include weather at the selected location</label> -->
+    </div>
+
+    <div class="form-group">
       <label for="post-body" class="text-muted mb-1"
         ><small>Body Content</small></label
       >
@@ -32,7 +50,7 @@
         type="text"
       ></textarea>
     </div>
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
     <button class="btn btn-primary">Save New Post</button>
   </form>
 </div>

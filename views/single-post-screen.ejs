@@ -19,7 +19,7 @@
         action="/post/<%= post._id %>/delete"
         method="POST"
       >
-      <input type="hidden" name="_csrf" value="<%= csrfToken %>"></input>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <button
           class="delete-post-button text-danger"
           data-toggle="tooltip"
@@ -42,7 +42,8 @@
       ><%= post.author.username %></a
     >
     on <%= post.createdDate.getMonth() + 1 %>/<%= post.createdDate.getDate()
-    %>/<%= post.createdDate.getFullYear() %>
+    %>/<%= post.createdDate.getFullYear() %> in <%= (post.location) ?
+    post.location : "undisclosed location" %>
   </p>
 
   <div class="body-content">
