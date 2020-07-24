@@ -12,16 +12,24 @@ let Post = function (data, userid, requestedPostId) {
   this.requestedPostId = requestedPostId
 }
 
-Post.prototype.getWeather = async function () {
+Post.prototype.getWeather = async function (city) {
   if (!this.weather_data_promise) {
-    let fetch_weather = await fetch(
-      "https://api.openweathermap.org/data/2.5/weather?id=6359002&appid=76551504e085b618204b4ad2e4e6f04d"
-    )
+    console.log(typeof city)
+    let url1 = "api.openweathermap.org/data/2.5/weather?q="
+    let url2 = city
+    let url3 = "&appid=76551504e085b618204b4ad2e4e6f04d"
+    console.log(url1 + url2 + url3)
+
+    let fetch_weather = fetch(url1 + url2 + url3)
+
+    // let fetch_weather = await fetch(
+    //   "https://api.openweathermap.org/data/2.5/weather?id=6359002&appid=76551504e085b618204b4ad2e4e6f04d"
+    // )
+
     this.weather_data_promise = await fetch_weather.json() // cache the Promise
   }
 
   let weather_data = await this.weather_data_promise
-  console.log(weather_data.main)
   return weather_data.main
 }
 
@@ -33,7 +41,7 @@ Post.prototype.cleanUp = async function () {
     this.data.body = ""
   }
 
-  return this.getWeather().then((weather_data) => {
+  return this.getWeather(this.data.location).then((weather_data) => {
     return {
       title: sanitizeHTML(this.data.title.trim(), {
         allowedTags: [],
